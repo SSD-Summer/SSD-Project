@@ -15,6 +15,7 @@ namespace Mustashe_ic
         public gamePlayForm()
         {
             InitializeComponent();
+            gamePlay game = new gamePlay(this);
         }
     }
 }

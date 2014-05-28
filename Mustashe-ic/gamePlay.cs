@@ -11,7 +11,7 @@ namespace Mustashe_ic
     {
         tileClass[,] board;
 
-        public gamePlay()
+        public gamePlay(gamePlayForm g)
         {
             board = new tileClass[4, 4];
 
@@ -20,7 +20,9 @@ namespace Mustashe_ic
                 for(int j = 0; j < 4; ++j)
                 {
                     board[i, j] = new tileClass();
-                    board[i,j].tile.
+                    board[i, j].tile.Size = new System.Drawing.Size(100, 100);
+                    board[i, j].tile.Location = new System.Drawing.Point(i * 100 + 5, j * 100 + 5);
+                    g.Controls.Add(board[i, j].tile);
                 }
             }
 
