@@ -51,6 +51,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="gamePlay.cs" />
+    <Compile Include="gamePlayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gamePlayForm.Designer.cs">
+      <DependentUpon>gamePlayForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="mainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,9 @@
     <Compile Include="tileClass.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gamePlayForm.resx">
+      <DependentUpon>gamePlayForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mainForm.resx">
       <DependentUpon>mainForm.cs</DependentUpon>

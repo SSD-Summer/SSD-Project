@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace Mustashe_ic
 {
-    public partial class mainForm : Form
+    public partial class gamePlayForm : Form
     {
-        public mainForm()
+        public gamePlayForm()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            gamePlayForm g = new gamePlayForm();
-            this.Hide();
-            g.Show();
         }
     }
 }
