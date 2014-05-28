@@ -21,6 +21,7 @@ namespace Mustashe_ic
         {
             gamePlayForm g = new gamePlayForm();
             this.Hide();
+            g.Text = button1.Text;
             g.Show();
         }
     }
