@@ -16,5 +16,12 @@ namespace Mustashe_ic
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var f = new mainForm();
+            this.Hide();
+            f.Show();
+        }
     }
 }
