@@ -12,10 +12,12 @@ namespace Mustashe_ic
 {
     public partial class gamePlayForm : Form
     {
+        gamePlay game;
         public gamePlayForm()
         {
             InitializeComponent();
-            gamePlay game = new gamePlay(this,4,1);
-        }
+            game = new gamePlay(this, 4, 1);
+            game.gameLoopStart(label_time);
+        }    
     }
 }

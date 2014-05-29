@@ -23,6 +23,7 @@ namespace Mustashe_ic
             this.Hide();
             g.Text = button1.Text;
             g.Show();
+            
         }
     }
 }

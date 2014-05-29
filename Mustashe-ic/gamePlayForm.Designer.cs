@@ -82,9 +82,9 @@
             this.label_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_time.Location = new System.Drawing.Point(628, 22);
             this.label_time.Name = "label_time";
-            this.label_time.Size = new System.Drawing.Size(103, 37);
+            this.label_time.Size = new System.Drawing.Size(55, 37);
             this.label_time.TabIndex = 4;
-            this.label_time.Text = "00:30";
+            this.label_time.Text = "30";
             // 
             // panel_tilePanel
             // 

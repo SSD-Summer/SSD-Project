@@ -11,17 +11,27 @@ namespace Mustashe_ic
     class gamePlay
     {
         tileClass[,] board;
+        int n; //nXn
         int score;
-        int timer;
-        Random rand = new Random();
+        public int timer { set; get; }
+        int count;
+        int randX, randY;
+        Random rand;
+        System.Threading.Timer Timer;
+        DateTime StopTime;
+        
         public gamePlay(gamePlayForm g, int size, int mode)
         {
             score = 0;
             timer = 30;
-            init_board(size, g);
+            n = size;
+            init_board(n, g);
             g.label_score.Text = score.ToString();
             g.label_time.Text = timer.ToString();
-            gameLoop();
+            randX = 5;
+            randY = 15;
+            n = (int)Math.Sqrt(n);
+            rand = new Random();
 
         }
 
@@ -42,28 +52,34 @@ namespace Mustashe_ic
             }
         }
 
-        private void gameLoop()
+        public void gameLoopStart(System.Windows.Forms.Label label)
         {
             timer = 30;
-            while(timer > 0)
-            {
-                Timer countDown = new Timer(30000); //1000 == 1sec  //Start game time
-                countDown.Elapsed += new ElapsedEventHandler(gameTick);
-                countDown.Interval = 1000;
-                countDown.Start();
-            }
+            StopTime = DateTime.Now.AddSeconds(30); //set timer
+            Timer = new System.Threading.Timer(gameTick, null, 0, 1000);
+            count = rand.Next(randX, randY); //get random tile wait time
+            label.Text = timer.ToString();
             
         }
-        private void gameTick(object sender, ElapsedEventArgs e)
+
+        private void gameTick(object state)
         {
-            timer--;
-            for(int x = 0; x < Math.Sqrt(this.board.Length); ++x)
+            if(DateTime.Now >= StopTime)
             {
-                for(int y = 0; y < Math.Sqrt(this.board.Length);++y)
-                {
-                    this.board[x, y].checkTime();
-                }
+                Timer.Dispose();
+                return;
             }
+            
+            timer--;
+            count--;
+            
+            if(count == 0)
+            {
+                int i = rand.Next(n-1);
+                int j = rand.Next(n-1);
+                board[i, j].tile = new System.Windows.Forms.Button();             
+            }
+             
         }
     }
 }
