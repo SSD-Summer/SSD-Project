@@ -17,8 +17,6 @@ namespace Mustashe_ic
         int count;
         int randX, randY;
         Random rand;
-        System.Threading.Timer Timer;
-        DateTime StopTime;
         
         public gamePlay(gamePlayForm g, int size, int mode)
         {
@@ -28,10 +26,11 @@ namespace Mustashe_ic
             init_board(n, g);
             g.label_score.Text = score.ToString();
             g.label_time.Text = timer.ToString();
-            randX = 5;
-            randY = 15;
+            randX = 1;
+            randY = 5;
             n = (int)Math.Sqrt(n);
             rand = new Random();
+            count = rand.Next(randX, randY); //get random tile wait time
 
         }
 
@@ -50,36 +49,30 @@ namespace Mustashe_ic
                     
                 }
             }
+           
         }
 
-        public void gameLoopStart(System.Windows.Forms.Label label)
-        {
-            timer = 30;
-            StopTime = DateTime.Now.AddSeconds(30); //set timer
-            Timer = new System.Threading.Timer(gameTick, null, 0, 1000);
-            count = rand.Next(randX, randY); //get random tile wait time
-            label.Text = timer.ToString();
+        //public void gameLoopStart(System.Windows.Forms.Label label)
+        //{
+        //    timer = 30;
+        //    StopTime = DateTime.Now.AddSeconds(30); //set timer
+        //    Timer = new System.Threading.Timer(gameTick, null, 0, 1000);
+        //    count = rand.Next(randX, randY); //get random tile wait time
+        //    label.Text = timer.ToString();
             
-        }
+        //}
 
-        private void gameTick(object state)
-        {
-            if(DateTime.Now >= StopTime)
-            {
-                Timer.Dispose();
-                return;
-            }
-            
-            timer--;
+        public void gameTick()
+        {     
             count--;
             
             if(count == 0)
             {
-                int i = rand.Next(n-1);
-                int j = rand.Next(n-1);
-                board[i, j].tile = new System.Windows.Forms.Button();             
+                int i = rand.Next(n);
+                int j = rand.Next(n);
+                board[i, j].tile.Hide();
+                count = rand.Next(randX, randY); //get random tile wait time
             }
-             
         }
     }
 }
