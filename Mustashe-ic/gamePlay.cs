@@ -17,6 +17,8 @@ namespace Mustashe_ic
         int count;
         int randX, randY;
         Random rand;
+        Queue<Tuple<int, int>> hiddenList;
+
         
         public gamePlay(gamePlayForm g, int size, int mode)
         {
@@ -27,10 +29,11 @@ namespace Mustashe_ic
             g.label_score.Text = score.ToString();
             g.label_time.Text = timer.ToString();
             randX = 1;
-            randY = 5;
+            randY = 2;
             n = (int)Math.Sqrt(n);
             rand = new Random();
             count = rand.Next(randX, randY); //get random tile wait time
+            hiddenList = new Queue<Tuple<int, int>>();
 
         }
 
@@ -65,11 +68,18 @@ namespace Mustashe_ic
         public void gameTick()
         {     
             count--;
+            if(hiddenList.Count >= 2)
+            {
+                
+                var temp = hiddenList.Dequeue();
+                board[int.Parse(temp.Item1.ToString()), int.Parse(temp.Item2.ToString())].tile.Show();
+            }
             
             if(count == 0)
             {
-                int i = rand.Next(n);
-                int j = rand.Next(n);
+                int i = rand.Next(n+1);
+                int j = rand.Next(n+1);
+                hiddenList.Enqueue(Tuple.Create(i, j));
                 board[i, j].tile.Hide();
                 count = rand.Next(randX, randY); //get random tile wait time
             }
