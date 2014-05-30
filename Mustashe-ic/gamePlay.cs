@@ -9,13 +9,13 @@ namespace Mustashe_ic
     class gamePlay
     {
         tileClass[,] board;
-        int n; //nXn
+        int n; //Defines the board as an N by N 
         int score;
-        public int timer { set; get; }
-        int count;
-        int randX, randY;
-        Random rand;
-        Queue<Tuple<int, int>> hiddenList;
+        public int timer { set; get; } //Probably will change to helper class
+        int count; //This is the variable used to keep track of how often to hide a tile 
+        int randX, randY; //ints used as random vars
+        Random rand; //Random generator - Will probably move 
+        Queue<Tuple<int, int>> hiddenList; //Used as holder for hidden tiles - Stores x and y coordinate of tile in tuple
 
 
         public gamePlay(gameMain g, int size, int mode)
@@ -28,7 +28,6 @@ namespace Mustashe_ic
             ///g.label_timer.Text = timer.ToString();
             randX = 0;
             randY = 2;
-            n = (int)Math.Sqrt(n);
             rand = new Random();
             count = rand.Next(randX, randY); //get random tile wait time
             hiddenList = new Queue<Tuple<int, int>>();
@@ -41,34 +40,37 @@ namespace Mustashe_ic
 
             for (int i = 0; i < size; ++i)
             {
-                for (int j = 0; j < size; ++j)
+                for (int j = 0; j < size; ++j)    // This is where I print the gameboard into the panel 
                 {
                     board[i, j] = new tileClass();
                     board[i, j].tile.Size = new System.Drawing.Size(100, 100);
                     board[i, j].tile.Location = new System.Drawing.Point(i * 200 + 5, j * 100 + 5);
-                    //g.panel_tileHolder.Controls.Add(board[i, j].tile);
+                    //g.panel_tileHolder.Controls.Add(board[i, j].tile); this is where I added the tiles to the holder panel
 
                 }
             }
 
         }
 
-        public void gameTick()
-        {
-            count--;
-            if (hiddenList.Count >= 2)
-            {
+        
 
+        public void gameTick() //Ran each sec for the alloted time 
+        {
+            count--; //decremete counter for hiding tile 
+            if (hiddenList.Count >= 2) //if there are 1 or more hidden tiles unhide one
+            {
+                //Would like to add a way to randomize the queue if we countine with this method in the future
                 var temp = hiddenList.Dequeue();
                 board[int.Parse(temp.Item1.ToString()), int.Parse(temp.Item2.ToString())].tile.Show();
             }
 
             if (count == 0)
-            {
+            { 
+                //when the count is 0 its tile to hide a tile 
                 int i = rand.Next(n + 1);
-                int j = rand.Next(n + 1);
-                hiddenList.Enqueue(Tuple.Create(i, j));
-                board[i, j].tile.Hide();
+                int j = rand.Next(n + 1);  //Gather random i and j values 
+                hiddenList.Enqueue(Tuple.Create(i, j));  //add them to the queue
+                board[i, j].tile.Hide();  //hide the associated tile 
                 count = rand.Next(randX, randY); //get random tile wait time
             }
         }

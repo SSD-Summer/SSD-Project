@@ -24,6 +24,8 @@ namespace Mustashe_ic
 
         private void button_start_Click(object sender, EventArgs e)
         {
+
+            //On Start click - Hide everything currently active on the form
             button1.Hide();
             button2.Hide();
             label_GameTitleLabel.Hide();
@@ -34,7 +36,7 @@ namespace Mustashe_ic
             button_worldsMode.Size = new Size(250, 390);
             button_worldsMode.AutoSize = true;
             button_worldsMode.Location = new Point(5, 5);
-            button_worldsMode.Click += new System.EventHandler(worldButton_Click);
+            button_worldsMode.Click += new System.EventHandler(worldButton_Click); //Bind button click event to worldButton_click function
             this.Controls.Add(button_worldsMode);
 
 
