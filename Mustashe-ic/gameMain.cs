@@ -17,6 +17,8 @@ namespace Mustashe_ic
         System.Windows.Forms.Button button_endlessMode;
         System.Windows.Forms.Button button_world1;
 
+        System.Windows.Forms.Timer game_timer;
+
         gamePlay game;
         public gameMain()
         {
@@ -69,6 +71,22 @@ namespace Mustashe_ic
             button_world1.Hide();
 
             game = new gamePlay(this, 4, 1);
+
+            game_timer = new Timer();
+            game_timer.Tick += new EventHandler(timer_Tick);
+            game_timer.Interval = 1000;
+            game_timer.Start();
+
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if(game.timer <= 0)
+            {
+                game_timer.Stop();
+            }
+
+            game.gameTick();
         }
 
     }

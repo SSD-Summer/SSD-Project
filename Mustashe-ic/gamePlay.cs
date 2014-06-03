@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Mustashe_ic
 {
+    /// <summary>
+    /// Holds all the form controls and game items for playing.
+    /// </summary>
     class gamePlay
     {
         tileClass[,] board;
@@ -13,7 +16,7 @@ namespace Mustashe_ic
         int score;
         public int timer { set; get; } //Probably will change to helper class
         int count; //This is the variable used to keep track of how often to hide a tile 
-        int randX, randY; //ints used as random vars
+        int hide_speed;//randX, randY; //ints used as random vars
         Random rand; //Random generator - Will probably move 
         Queue<Tuple<int, int>> hiddenList; //Used as holder for hidden tiles - Stores x and y coordinate of tile in tuple
 
@@ -50,20 +53,20 @@ namespace Mustashe_ic
             label_score.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right))); ;
             //tile panel generation
             panel_tile_holder = new System.Windows.Forms.Panel();
-            panel_tile_holder.Size = new System.Drawing.Size(g.Size.Width, 290);
+            panel_tile_holder.Size = new System.Drawing.Size(g.Size.Width, 250);
             panel_tile_holder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Left)));
             panel_tile_holder.AutoSize = true;
-            panel_tile_holder.Location = new System.Drawing.Point(0, 100);
+            panel_tile_holder.Location = new System.Drawing.Point(0, 200);
 
             g.Controls.Add(label_lives);
             g.Controls.Add(label_timer);
             g.Controls.Add(panel_tile_holder);
 
             init_board(n); //initializes the boar
-            randX = 0;
-            randY = 2; //Both used for random number generation
+            hide_speed = 3;
+            //randY = 2; //Both used for random number generation
             rand = new Random();  //needed for random generation
-            count = rand.Next(randX, randY); //get random tile wait time
+            count = rand.Next(hide_speed); //get random tile wait time
             hiddenList = new Queue<Tuple<int, int>>(); //initalizes queue to hold the hidden tiles
 
 
@@ -84,18 +87,19 @@ namespace Mustashe_ic
                     board[i, j].tile.Size = new System.Drawing.Size(100, 100);
                     board[i, j].tile.Location = new System.Drawing.Point(i * 125 + 5, j * 100 + 5);
                     panel_tile_holder.Controls.Add(board[i, j].tile);
-                    //g.panel_tileHolder.Controls.Add(board[i, j].tile); this is where I added the tiles to the holder panel
-
                 }
             }
 
         }
 
         
-
+        /// <summary>
+        /// One "Turn" of the game. Decrements the count variable. If there are 2 or more hidden tiles, un-hide one. If count is '0' then hide a random tile then generate a new counter.
+        /// </summary>
         public void gameTick() //Ran each sec for the alloted time 
         {
-            count--; //decremete counter for hiding tile 
+            --count; //decremete counter for hiding tile
+            --timer;
             if (hiddenList.Count >= 2) //if there are 1 or more hidden tiles unhide one
             {
                 //Would like to add a way to randomize the queue if we countine with this method in the future
@@ -103,15 +107,17 @@ namespace Mustashe_ic
                 board[int.Parse(temp.Item1.ToString()), int.Parse(temp.Item2.ToString())].tile.Show();
             }
 
-            if (count == 0)
+            if (count < 0)
             { 
                 //when the count is 0 its tile to hide a tile 
-                int i = rand.Next(n + 1);
-                int j = rand.Next(n + 1);  //Gather random i and j values 
+                int i = rand.Next(n);
+                int j = rand.Next(n);  //Gather random i and j values 
                 hiddenList.Enqueue(Tuple.Create(i, j));  //add them to the queue
                 board[i, j].tile.Hide();  //hide the associated tile 
-                count = rand.Next(randX, randY); //get random tile wait time
+                count = rand.Next(3); //get random tile wait time
             }
+            label_timer.Text = timer.ToString();
+            
         }
     }
 }
