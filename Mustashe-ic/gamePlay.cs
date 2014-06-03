@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Mustashe_ic
 {
@@ -86,6 +86,7 @@ namespace Mustashe_ic
                     board[i, j] = new tileClass();
                     board[i, j].tile.Size = new System.Drawing.Size(100, 100);
                     board[i, j].tile.Location = new System.Drawing.Point(i * 125 + 5, j * 100 + 5);
+                    //board[i, j].tile.Click += new EventHandler(tile_clicked);
                     panel_tile_holder.Controls.Add(board[i, j].tile);
                 }
             }
@@ -117,6 +118,11 @@ namespace Mustashe_ic
                 count = rand.Next(hide_speed); //get random tile wait time
             }
             label_timer.Text = timer.ToString();
+            
+        }
+
+        private void tile_clicked(object sender, EventArgs e)
+        {
             
         }
     }
