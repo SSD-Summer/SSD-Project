@@ -20,8 +20,8 @@ namespace Mustashe_ic
         Random rand; //Random generator - Will probably move 
         Queue<Tuple<int, int>> hiddenList; //Used as holder for hidden tiles - Stores x and y coordinate of tile in tuple
 
-        System.Windows.Forms.Label label_lives, label_timer, label_score;
-        System.Windows.Forms.Panel panel_tile_holder;
+        public System.Windows.Forms.Label label_lives, label_timer, label_score;
+        public System.Windows.Forms.Panel panel_tile_holder;
 
         /// <summary>
         /// Initalizes an instance of the game
