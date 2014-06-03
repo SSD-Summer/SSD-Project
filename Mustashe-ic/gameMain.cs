@@ -15,6 +15,7 @@ namespace Mustashe_ic
 
         System.Windows.Forms.Button button_worldsMode;
         System.Windows.Forms.Button button_endlessMode;
+        System.Windows.Forms.Button button_world1;
         public gameMain()
         {
             InitializeComponent();
@@ -48,12 +49,23 @@ namespace Mustashe_ic
             this.Controls.Add(button_endlessMode);            
         }
 
-        private void worldButton_Click(object sender, EventArgs e) //Maybe this will be the event that starts the game or 
+        private void worldButton_Click(object sender, EventArgs e) //Loads world selection buttons 
+        {
+            button_worldsMode.Hide();
+            button_endlessMode.Hide();
+            button_world1 = new Button();
+            button_world1.Text = "World 1";
+            button_world1.Size = new Size(250, 195);
+            button_world1.AutoSize = true;
+            button_world1.Location = new Point(5, 5);
+            button_world1.Click += new System.EventHandler(world_startGame);
+            this.Controls.Add(button_world1);
+        }
+       
+        private void world_startGame(object sender, EventArgs e)
         {
 
         }
-       
-
 
     }
 }
