@@ -17,20 +17,40 @@ namespace Mustashe_ic
         Random rand; //Random generator - Will probably move 
         Queue<Tuple<int, int>> hiddenList; //Used as holder for hidden tiles - Stores x and y coordinate of tile in tuple
 
+        System.Windows.Forms.Label label_lives, label_timer, label_score;
+        System.Windows.Forms.Panel panel_tile_holder;
+
 
         public gamePlay(gameMain g, int size, int mode)
         {
-            score = 0;
-            timer = 30;
-            n = size;
-            init_board(n, g);
-            //g.label_Score.Text = score.ToString();
-            ///g.label_timer.Text = timer.ToString();
+            score = 0; //beginning score to zero
+            timer = 30; // Starting time 30 secs
+            n = size; //size of tile board - nxn
+            init_board(n, g); //initializes the boar
             randX = 0;
-            randY = 2;
-            rand = new Random();
+            randY = 2; //Both used for random number generation
+            rand = new Random();  //needed for random generation
             count = rand.Next(randX, randY); //get random tile wait time
-            hiddenList = new Queue<Tuple<int, int>>();
+            hiddenList = new Queue<Tuple<int, int>>(); //initalizes queue to hold the hidden tiles
+            
+            //Lives label generation 
+            label_lives = new System.Windows.Forms.Label();
+            label_lives.Text = "Number of lives";
+            label_lives.AutoSize = true;
+            label_lives.Location = new System.Drawing.Point(5, 5);
+            label_lives.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            //timer label generation
+            label_timer = new System.Windows.Forms.Label();
+            label_timer.Text = timer.ToString();
+            label_timer.Location = new System.Drawing.Point(230, 5);
+            label_timer.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            //score label generation
+            label_score = new System.Windows.Forms.Label();
+            label_score.Text = score.ToString();
+            label_score.Location = new System.Drawing.Point(450, 5);
+            label_score.Anchor = System.Windows.Forms.AnchorStyles.Top;
+
+
 
         }
 
