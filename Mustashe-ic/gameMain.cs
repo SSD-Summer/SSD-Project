@@ -16,10 +16,12 @@ namespace Mustashe_ic
         System.Windows.Forms.Button button_worldsMode;
         System.Windows.Forms.Button button_endlessMode;
         System.Windows.Forms.Button button_world1;
+
+        gamePlay game;
         public gameMain()
         {
             InitializeComponent();
-            gamePlay game = new gamePlay(this, 4, 1);
+            //gamePlay game = new gamePlay(this, 4, 1);
 
         }
 
@@ -64,7 +66,9 @@ namespace Mustashe_ic
        
         private void world_startGame(object sender, EventArgs e)
         {
+            button_world1.Hide();
 
+            game = new gamePlay(this, 4, 1);
         }
 
     }

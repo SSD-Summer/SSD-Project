@@ -20,25 +20,24 @@ namespace Mustashe_ic
         System.Windows.Forms.Label label_lives, label_timer, label_score;
         System.Windows.Forms.Panel panel_tile_holder;
 
-
+        /// <summary>
+        /// Initalizes an instance of the game
+        /// </summary>
+        /// <param name="g"> The form the game will be played on.</param>
+        /// <param name="size">The number of tiles that the board will have. n x n </param>
+        /// <param name="mode">Specifys the mode of play. World(world 1, 2, 3, ....) or Endless</param>
         public gamePlay(gameMain g, int size, int mode)
         {
             score = 0; //beginning score to zero
             timer = 30; // Starting time 30 secs
             n = size; //size of tile board - nxn
-            init_board(n, g); //initializes the boar
-            randX = 0;
-            randY = 2; //Both used for random number generation
-            rand = new Random();  //needed for random generation
-            count = rand.Next(randX, randY); //get random tile wait time
-            hiddenList = new Queue<Tuple<int, int>>(); //initalizes queue to hold the hidden tiles
             
             //Lives label generation 
             label_lives = new System.Windows.Forms.Label();
             label_lives.Text = "Number of lives";
             label_lives.AutoSize = true;
             label_lives.Location = new System.Drawing.Point(5, 5);
-            label_lives.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            label_lives.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             //timer label generation
             label_timer = new System.Windows.Forms.Label();
             label_timer.Text = timer.ToString();
@@ -48,13 +47,32 @@ namespace Mustashe_ic
             label_score = new System.Windows.Forms.Label();
             label_score.Text = score.ToString();
             label_score.Location = new System.Drawing.Point(450, 5);
-            label_score.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            label_score.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right))); ;
+            //tile panel generation
+            panel_tile_holder = new System.Windows.Forms.Panel();
+            panel_tile_holder.Size = new System.Drawing.Size(g.Size.Width, 290);
+            panel_tile_holder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Left)));
+            panel_tile_holder.AutoSize = true;
+            panel_tile_holder.Location = new System.Drawing.Point(0, 100);
 
+            g.Controls.Add(label_lives);
+            g.Controls.Add(label_timer);
+            g.Controls.Add(panel_tile_holder);
+
+            init_board(n); //initializes the boar
+            randX = 0;
+            randY = 2; //Both used for random number generation
+            rand = new Random();  //needed for random generation
+            count = rand.Next(randX, randY); //get random tile wait time
+            hiddenList = new Queue<Tuple<int, int>>(); //initalizes queue to hold the hidden tiles
 
 
         }
-
-        private void init_board(int size, gameMain g) //Creates a size X size grid of tiles 
+        /// <summary>
+        /// Initalizes the tile board onto panel_tile_holder
+        /// </summary>
+        /// <param name="size">The number of tiles on the game board. size x size </param>
+        private void init_board(int size) //Creates a size X size grid of tiles 
         {
             board = new tileClass[size, size];
 
@@ -64,7 +82,8 @@ namespace Mustashe_ic
                 {
                     board[i, j] = new tileClass();
                     board[i, j].tile.Size = new System.Drawing.Size(100, 100);
-                    board[i, j].tile.Location = new System.Drawing.Point(i * 200 + 5, j * 100 + 5);
+                    board[i, j].tile.Location = new System.Drawing.Point(i * 125 + 5, j * 100 + 5);
+                    panel_tile_holder.Controls.Add(board[i, j].tile);
                     //g.panel_tileHolder.Controls.Add(board[i, j].tile); this is where I added the tiles to the holder panel
 
                 }
