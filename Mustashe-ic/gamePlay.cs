@@ -60,11 +60,11 @@ namespace Mustashe_ic
 
             g.Controls.Add(label_lives);
             g.Controls.Add(label_timer);
+            g.Controls.Add(label_score);
             g.Controls.Add(panel_tile_holder);
 
             init_board(n); //initializes the boar
-            hide_speed = 3;
-            //randY = 2; //Both used for random number generation
+            hide_speed = 3;//How quickly tiles hide, 0 - 3 secs  
             rand = new Random();  //needed for random generation
             count = rand.Next(hide_speed); //get random tile wait time
             hiddenList = new Queue<Tuple<int, int>>(); //initalizes queue to hold the hidden tiles
@@ -114,7 +114,7 @@ namespace Mustashe_ic
                 int j = rand.Next(n);  //Gather random i and j values 
                 hiddenList.Enqueue(Tuple.Create(i, j));  //add them to the queue
                 board[i, j].tile.Hide();  //hide the associated tile 
-                count = rand.Next(3); //get random tile wait time
+                count = rand.Next(hide_speed); //get random tile wait time
             }
             label_timer.Text = timer.ToString();
             

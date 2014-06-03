@@ -41,6 +41,7 @@ namespace Mustashe_ic
             button_worldsMode.Size = new Size(250, 390);
             button_worldsMode.AutoSize = true;
             button_worldsMode.Location = new Point(5, 5);
+            button_worldsMode.Anchor = ((System.Windows.Forms.AnchorStyles)(AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top));
             button_worldsMode.Click += new System.EventHandler(worldButton_Click); //Bind button click event to worldButton_click function
             this.Controls.Add(button_worldsMode);
 
@@ -50,6 +51,7 @@ namespace Mustashe_ic
             button_endlessMode.Size = new Size(250, 390);
             button_endlessMode.AutoSize = true;
             button_endlessMode.Location = new Point(255, 5);
+            button_endlessMode.Anchor = ((AnchorStyles)(AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom));
             this.Controls.Add(button_endlessMode);            
         }
 
@@ -62,6 +64,7 @@ namespace Mustashe_ic
             button_world1.Size = new Size(250, 195);
             button_world1.AutoSize = true;
             button_world1.Location = new Point(5, 5);
+            button_world1.Anchor = ((AnchorStyles)(AnchorStyles.Top | AnchorStyles.Left));
             button_world1.Click += new System.EventHandler(world_startGame);
             this.Controls.Add(button_world1);
         }
@@ -81,7 +84,7 @@ namespace Mustashe_ic
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if(game.timer <= 0)
+            if(game.timer <= 1)
             {
                 game_timer.Stop();
             }
