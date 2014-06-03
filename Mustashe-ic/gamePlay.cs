@@ -64,7 +64,7 @@ namespace Mustashe_ic
             g.Controls.Add(panel_tile_holder);
 
             init_board(n); //initializes the boar
-            hide_speed = 3;//How quickly tiles hide, 0 - 3 secs  
+            hide_speed = 2;//How quickly tiles hide, 0 - 3 secs  
             rand = new Random();  //needed for random generation
             count = rand.Next(hide_speed); //get random tile wait time
             hiddenList = new Queue<Tuple<int, int>>(); //initalizes queue to hold the hidden tiles
